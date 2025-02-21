@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coupon Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .coupon-container {
+            background: #e6f8e6;
+            width: 350px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .icon {
+            background-color: #27a745;
+            color: white;
+            font-weight: bold;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .coupon-details {
+            flex-grow: 1;
+        }
+        .coupon-details h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #027a30;
+            font-weight: bold;
+        }
+        .coupon-details p {
+            margin: 3px 0 0;
+            font-size: 14px;
+            color: #444;
+        }
+        .coupon-code {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .coupon-code span {
+            font-weight: bold;
+        }
+        .copy-btn {
+            background: #27a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background: #1e8e3e;
+        }
+    </style>
+</head>
+<body>
+
+<div class="coupon-container">
+    <div class="icon">%</div>
+    <div class="coupon-details">
+        <h3>Flat 10% OFF</h3>
+        <p>Shop for ₹1899 and above</p>
+        <div class="coupon-code">
+            <span id="coupon-text">TINTBOX10</span>
+            <button class="copy-btn" onclick="copyCoupon()">Copy</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyCoupon() {
+        const couponText = document.getElementById("coupon-text").innerText;
+        navigator.clipboard.writeText(couponText).then(() => {
+            alert("Coupon code copied: " + couponText);
+        });
+    }
+</script>
+
+</body>
+</html>
