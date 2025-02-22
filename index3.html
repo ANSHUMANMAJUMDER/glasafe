@@ -77,13 +77,20 @@
     .image-container img {
       max-width: 100%;
       height: auto;
-      transition: transform 0.3s ease;
       border-radius: 10px;
-      cursor: zoom-in;
     }
 
-    .image-container img:hover {
-      transform: scale(1.5);
+    .text-overlay {
+      position: absolute;
+      top: 45%; /* Move text slightly up */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: yellow; /* Change text color to yellow */
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      pointer-events: none; /* Ensure the text is not interactive */
+      white-space: nowrap;
     }
 
     /* Details Section */
@@ -102,34 +109,6 @@
       margin-bottom: 15px;
     }
 
-    .customization-options {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .customization-options label {
-      display: inline-block;
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .customization-options input[type="radio"] {
-      display: none;
-    }
-
-    .customization-options label:hover {
-      background-color: #f0f0f0;
-    }
-
-    .customization-options input[type="radio"]:checked + label {
-      background-color: #ddd;
-      font-weight: bold;
-    }
-
     .input-group {
       margin-bottom: 15px;
     }
@@ -146,13 +125,6 @@
       padding: 8px;
       border: 1px solid #ddd;
       border-radius: 5px;
-    }
-
-    .additional-charge {
-      margin-top: 10px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #444;
     }
 
     .add-to-cart-btn {
@@ -182,6 +154,7 @@
       <!-- Image Section -->
       <div class="image-container">
         <img src="https://i.pinimg.com/736x/f3/30/17/f330176af0a8770efec48355ac2af805.jpg" alt="Product Image">
+        <div class="text-overlay" id="text-overlay"></div>
       </div>
       
       <!-- Details Section -->
@@ -189,29 +162,32 @@
         <h2>Borosilicate Glass Bottle with Protective Silicone Sleeve, 750ml - ₹1,060.00</h2>
         <p>Customized order will be shipped in 7 days. Only Prepaid Orders Accepted in Customization.</p>
 
-        <div class="customization-options">
-          <input type="radio" id="engrave-name" name="customization-option" value="name" checked>
-          <label for="engrave-name">Engrave Name (+ ₹100)</label>
-
-          <input type="radio" id="engrave-logo" name="customization-option" value="logo">
-          <label for="engrave-logo">Engrave Logo (+ ₹150)</label>
-        </div>
-
         <div class="input-group">
           <label for="name-input">Enter your name</label>
-          <input type="text" id="name-input" maxlength="12" placeholder="Max 12 characters">
+          <input type="text" id="name-input" maxlength="12" placeholder="Max 12 characters" oninput="updateText()">
         </div>
 
         <div class="input-group">
           <label for="font-select">Select your font style</label>
-          <select id="font-select">
+          <select id="font-select" onchange="updateText()">
             <option value="Lucida Bright">Lucida Bright</option>
             <option value="Times New Roman">Times New Roman</option>
             <option value="Arial">Arial</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Impact">Impact</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Palatino Linotype">Palatino Linotype</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Century Gothic">Century Gothic</option>
           </select>
         </div>
 
-        <p class="additional-charge">Additional Charge: ₹0.00</p>
         <button class="add-to-cart-btn">Add to Cart</button>
       </div>
     </div>
@@ -226,6 +202,16 @@
     // Close the modal
     function closeModal() {
       document.getElementById("customization-modal").style.display = "none";
+    }
+
+    // Update the text overlay on the image
+    function updateText() {
+      const textInput = document.getElementById("name-input").value;
+      const fontSelect = document.getElementById("font-select").value;
+
+      const overlay = document.getElementById("text-overlay");
+      overlay.textContent = textInput;
+      overlay.style.fontFamily = fontSelect;
     }
   </script>
 </body>
